@@ -25,7 +25,12 @@ The state space is finite and has 3^9 = 19683 possible values, as there are a to
 The actions space, which will be the branching factor of minimax algorithm, has a maximum value of 9 corresponding to the empty board, and decreases of one each time an agent (either the human player or the bot) takes an action.
 
 **Algorithm**:
-Minimax is a recursive algorithm that can be used to make decisions in zero-sum games, where one player’s loss is the other player’s gain.
+
+Minimax is a recursive algorithm that can be used to make decisions in zero-sum games, 
+where one player’s loss is the other player’s gain.
+For a terminal state, i.e. a state where the game is finished, the minimax value for the bot is +10 if it has won, -10 if it has lost or 0 if it's a tie.
+[...]
+For non terminal state, the minimax value is the max of minimax value if bot is playing of min of minimax value if human player is playing
 
 <p align="center">
   <img width="50%" height="50%" img src="docs/minimax-move-tree.png">
