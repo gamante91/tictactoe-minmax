@@ -34,3 +34,8 @@ For non terminal states, the minimax value is computed recursively as the either
 <p align="center">
   <img width="50%" height="50%" img src="docs/minimax-move-tree.png">
 </p>
+
+**Possible improvements**
+- alpha-beta pruning
+- memoization
+- comparison with a learning algorithm (i.e. Q-Learning)
