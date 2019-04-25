@@ -4,7 +4,7 @@ The aim of this repo is to develop a simple bot that plays Tic-Tac-Toe using the
 
 **Environment**:
 
-The classic Tic-Tac-Toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
+The classic Tic-Tac-Toe is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid.<br>
 The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
 
 ```
@@ -26,10 +26,12 @@ The actions space, which will be the branching factor of minimax algorithm, has 
 
 **Algorithm**:
 
-Minimax is a recursive algorithm that can be used to make decisions in zero-sum games, 
-where one player’s loss is the other player’s gain.
-For a terminal state, i.e. a state where the game is finished, the minimax value for the bot is +10 if it has won, -10 if it has lost or 0 if it's a tie.
+Minimax is a recursive algorithm that can be used to make decisions in zero-sum games, where one player’s loss is the other player’s gain.<br>
+It consists of assigning a value in terms of utility for the bot to any state-action pairs, this value is called the minimax value.<br>
+For a terminal state, i.e. a state where the game is finished, the minimax value is +10 if the bot won the game, -10 if it has lost and 0 if it's a tie.
 [...]
+For a non terminal state, the minimax value is computed as 
+
 For non terminal state, the minimax value is the max of minimax value if bot is playing of min of minimax value if human player is playing
 
 <p align="center">
