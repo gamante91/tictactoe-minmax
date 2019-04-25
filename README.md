@@ -27,12 +27,10 @@ The actions space, which will be the branching factor of minimax algorithm, has 
 **Algorithm**:
 
 Minimax is a recursive algorithm that can be used to make decisions in zero-sum games, where one player’s loss is the other player’s gain.<br>
-It consists of assigning a value in terms of utility for the bot to any state-action pairs, this value is called the minimax value.<br>
+It consists of assigning a value in terms of utility for the bot to any state, this value is called the minimax value.<br>
 For a terminal state, i.e. a state where the game is finished, the minimax value is +10 if the bot won the game, -10 if it has lost and 0 if it's a tie.
 [...]
-For a non terminal state, the minimax value is computed as 
-
-For non terminal state, the minimax value is the max of minimax value if bot is playing of min of minimax value if human player is playing
+For a non terminal state, the minimax value is computed recursively as the either the maximum or minimum value of the reachable states from the current one, depending wheather the bot or the human player is playing.
 
 <p align="center">
   <img width="50%" height="50%" img src="docs/minimax-move-tree.png">
