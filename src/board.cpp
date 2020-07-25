@@ -17,11 +17,11 @@ Mark convert(char c)
     
 } // namespace
 
-Board::Board() : m_board(3, {Mark::None, Mark::None, Mark::None}) {}
+Board::Board() : m_board(vector<vector<Mark>>(n,  vector<Mark>(n, Mark::None))) {}
 
 Board::Board(const Board& b) : m_board(b.m_board) {}
 
-Board::Board(const vector<vector<char>> board)
+Board::Board(const vector<vector<char>>& board)
 {
     for (const auto& row : board)
     {
@@ -43,8 +43,8 @@ Moves Board::getPossibleMoves() const
 {
     Moves possibleMoves;
 
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
+    for (int i = 0; i < Board::n; ++i)
+        for (int j = 0; j < Board::n; ++j)
             if (m_board[i][j] == Mark::None)
                 possibleMoves.emplace_back(make_pair(i,j));
 
@@ -70,9 +70,9 @@ ostream& operator<<(ostream& o, const Mark& m)
 
 ostream& operator<<(ostream& o, const Board& b)
 {
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < Board::n; ++i)
     {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < Board::n; ++j)
             o << b.at(i,j);
         o << endl;
     }

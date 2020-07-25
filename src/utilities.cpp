@@ -5,7 +5,7 @@ namespace Utilities {
     
     bool isValid(const Board& b, const Move& m)
     {
-        auto withinBounds = [](int i){ return i >= 0 and i < 3;};
+        auto withinBounds = [](int i){ return i >= 0 and i < Board::n; };
         
         if (not withinBounds(m.first) or not withinBounds(m.second))
             return false;
@@ -15,8 +15,8 @@ namespace Utilities {
     
     bool isEmpty(const Board& b)
     {
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 3; ++j)
+        for (int i = 0; i < Board::n; ++i)
+            for (int j = 0; j < Board::n; ++j)
                 if (b.at(i,j) != Mark::None)
                     return false;
         
@@ -25,8 +25,8 @@ namespace Utilities {
     
     bool isFull(const Board& b)
     {
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 3; ++j)
+        for (int i = 0; i < Board::n; ++i)
+            for (int j = 0; j < Board::n; ++j)
                 if (b.at(i,j) == Mark::None)
                     return false;
         
@@ -35,7 +35,7 @@ namespace Utilities {
     
     BoardState checkRows(const Board& b)
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < Board::n; ++i)
         {
             if (b.at(i,0) == b.at(i,1) and b.at(i,1) == b.at(i,2))
                 if (b.at(i,0) == Mark::Human)
@@ -49,7 +49,7 @@ namespace Utilities {
     
     BoardState checkCols(const Board& b)
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < Board::n; ++i)
         {
             if (b.at(0,i) == b.at(1,i) and b.at(1,i) == b.at(2,i))
                 if (b.at(0,i) == Mark::Human)
