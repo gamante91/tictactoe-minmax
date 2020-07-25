@@ -41,7 +41,7 @@ int recursiveMinMax(const Board& b, Player p) {
 
 namespace {
     ostream& operator<<(ostream& o, const Move& move) {
-        o << "(" << move.first << ", " << move.second << ")";
+        o << "(" << move.first + 1 << ", " << move.second + 1 << ")";
 
         return o;
     }
@@ -66,6 +66,9 @@ Result computeBestMove(const Board& b, const Moves& possibleMoves) {
         int minmaxValue = recursiveMinMax(newBoard, Player::Human);        
         outcomes.emplace_back(make_pair(move, minmaxValue));
     }
+
+    cout << "AI possible moves:" << endl
+         << outcomes << endl;
     
     auto bestMove = *max_element(outcomes.cbegin(), outcomes.cend(),
                                  [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });

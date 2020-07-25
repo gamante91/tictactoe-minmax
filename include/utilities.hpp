@@ -4,11 +4,11 @@
 
 namespace Utilities {
    
-BoardState checkBoard(const Board& b);
+BoardState checkBoard(const Board&);
     
-bool isValid(const Board& b, const Move& m);
-bool isEmpty(const Board& b);
-bool isFull(const Board& b);
+bool isValid(const Board&, const Move&);
+bool isEmpty(const Board&);
+bool isFull(const Board&);
 
 
 } // namespace Utilities

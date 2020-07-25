@@ -16,19 +16,19 @@ public:
     static const int n = 3;
 
     Board();
-    Board(const Board& b);
-    Board(const vector<vector<char>>& board);
-    Board(const Board& b, const Move& m, Mark x);
+    Board(const Board&);
+    Board(const vector<vector<char>>&);
+    Board(const Board& b, const Move&, Mark);
     
-    void update(const Move& m, Mark x);
+    void update(const Move&, Mark);
     Moves getPossibleMoves() const;
-    Mark at(int i, int j) const;
+    Mark at(int, int) const;
 
 private:
     vector<vector<Mark>> m_board;
 };
 
-ostream& operator<<(ostream& o, const Move& m);
-ostream& operator<<(ostream& o, const Moves& m);
-ostream& operator<<(ostream& o, const Mark& m);
-ostream& operator<<(ostream& o, const Board& b);
+ostream& operator<<(ostream&, const Move&);
+ostream& operator<<(ostream&, const Moves&);
+ostream& operator<<(ostream&, const Mark&);
+ostream& operator<<(ostream&, const Board&);
