@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+#include <random>
 
 #include <board.hpp>
 #include <minmax.hpp>
@@ -33,8 +34,8 @@ MinMaxValue recursiveMinMax(const Board& board, Player player) {
         outcomes.emplace_back(outcome);
     }
     
-    auto minMaxValue = (player == Player::AI) ? *max_element(outcomes.begin(),outcomes.end())
-                                              : *min_element(outcomes.begin(),outcomes.end());
+    auto minMaxValue = (player == Player::AI) ? *max_element(outcomes.cbegin(),outcomes.cend())
+                                              : *min_element(outcomes.cbegin(),outcomes.cend());
     
     return minMaxValue;
 }
