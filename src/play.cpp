@@ -6,8 +6,7 @@
 
 using namespace std;
 
-Move getHumanMove(const Board& b)
-{
+Move getHumanMove(const Board& b) {
     Move m;
 
     do {
@@ -21,12 +20,10 @@ Move getHumanMove(const Board& b)
     return m;
 }
 
-BoardState playAI(Board& board)
-{
+BoardState playAI(Board& board) {
     auto validMoves = board.getPossibleMoves();
     
-    if (not validMoves.empty())
-    {
+    if (not validMoves.empty()) {
         auto result = computeBestMove(board, validMoves);
         const Move& selectedMove = result.first;
         MinMaxValue minMaxValue = result.second;
@@ -39,8 +36,7 @@ BoardState playAI(Board& board)
     return Utilities::checkBoard(board);
 }
 
-BoardState playHuman(Board& board)
-{
+BoardState playHuman(Board& board) {
     Move humanSelectedMove = getHumanMove(board);
     board.update(humanSelectedMove, Mark::Human);
     

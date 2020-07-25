@@ -39,6 +39,21 @@ int recursiveMinMax(const Board& b, Player p) {
     return minMaxValue;
 }
 
+namespace {
+    ostream& operator<<(ostream& o, const Move& move) {
+        o << "(" << move.first << ", " << move.second << ")";
+
+        return o;
+    }
+
+    ostream& operator<<(ostream& o, const vector<Result>& results) {
+        for (const auto& result : results)
+            o << "Move: " << result.first << " with MinMaxValue: " << result.second << endl;
+
+        return o;
+    }
+}
+
 Result computeBestMove(const Board& b, const Moves& possibleMoves) {
     if (Utilities::isEmpty(b))
         return make_pair(make_pair(1,1), +10);
@@ -52,7 +67,7 @@ Result computeBestMove(const Board& b, const Moves& possibleMoves) {
         outcomes.emplace_back(make_pair(move, minmaxValue));
     }
     
-    auto bestMove = *max_element(outcomes.begin(), outcomes.end(),
+    auto bestMove = *max_element(outcomes.cbegin(), outcomes.cend(),
                                  [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });
                                       
     return bestMove;
