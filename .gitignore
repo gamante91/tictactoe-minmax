@@ -1,2 +1,5 @@
 build
+cmake_install.cmake
+Makefile
+tictactoe-minmax
 .DS_*
