@@ -10,5 +10,4 @@ bool isValid(const Board&, const Move&);
 bool isEmpty(const Board&);
 bool isFull(const Board&);
 
-
 } // namespace Utilities

@@ -6,18 +6,18 @@
 
 using namespace std;
 
-Move getHumanMove(const Board& b) {
-    Move m;
+Move getHumanMove(const Board& board) {
+    Move move;
 
     do {
-        int i,j;
+        int i = 0, j = 0;
         cout << "Enter a valid move:" << endl;
         cout << "row: "; cin >> i;
         cout << "col: "; cin >> j;
-        m = make_pair(--i, --j);
-    } while (not Utilities::isValid(b, m));
+        move = make_pair(--i, --j);
+    } while (not Utilities::isValid(board, move));
     
-    return m;
+    return move;
 }
 
 BoardState playAI(Board& board) {
@@ -61,12 +61,13 @@ int main() {
         }
     }
     
-    if (state == BoardState::HumanWon)
+    if (state == BoardState::HumanWon) {
         cout << "Congratulations, you won!" << endl;
-    else if (state == BoardState::AIWon)
+    } else if (state == BoardState::AIWon) {
         cout << "AI won!" << endl;
-    else
+    } else {
         cout << "It's a tie, well done!" << endl;
+    }
 
     return 0;
 }
