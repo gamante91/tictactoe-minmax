@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <random>
+#include <time.h>
 
 #include <board.hpp>
 #include <minmax.hpp>
@@ -51,15 +52,14 @@ Result selectBestMove(const vector<Result>& outcomes) {
     auto bestMove = max_element(outcomes.begin(),
                                 outcomes.end(),
                                 [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });
-    auto bestMinMaxValue = bestMove->second;
+    vector<Result> bestMoves;
+    copy_if(outcomes.begin(),
+            outcomes.end(),
+            back_inserter(bestMoves),
+            [&bestMove](const auto& result){ return result.second == bestMove->second; });
+    srand(time(nullptr));
     auto it = outcomes.begin();
-    bool found = false;
-
-    while (not found) {
-        it = outcomes.begin();
-        std::advance(it, std::rand() % outcomes.size());
-        found = it->second == bestMinMaxValue;
-    }
+    std::advance(it, std::rand() % bestMoves.size());
 
     return *it;
 }
