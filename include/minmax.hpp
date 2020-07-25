@@ -1,6 +1,7 @@
 #pragma once
 
-using Result = pair<Move, int>;
+using MinMaxValue = int;
+using Result = pair<Move, MinMaxValue>;
 
 Result computeBestMove(const Board& b, const Moves& possibleMoves);
 

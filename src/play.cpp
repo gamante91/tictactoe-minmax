@@ -21,46 +21,46 @@ Move getHumanMove(const Board& b)
     return m;
 }
 
-BoardState playAI(Board& b)
+BoardState playAI(Board& board)
 {
-    auto validMoves = b.getPossibleMoves();
+    auto validMoves = board.getPossibleMoves();
     
     if (not validMoves.empty())
     {
-        auto result = computeBestMove(b, validMoves);
+        auto result = computeBestMove(board, validMoves);
         const Move& selectedMove = result.first;
-        int minMaxValue = result.second;
-        b.update(selectedMove, Mark::AI);
+        MinMaxValue minMaxValue = result.second;
+        board.update(selectedMove, Mark::AI);
         
         cout << "AI selected move " << selectedMove << " with minmax value " << minMaxValue << endl;
-        cout << b;
+        cout << board;
     }
     
-    return Utilities::checkBoard(b);
+    return Utilities::checkBoard(board);
 }
 
-BoardState playHuman(Board& b)
+BoardState playHuman(Board& board)
 {
-    Move humanSelectedMove = getHumanMove(b);
-    b.update(humanSelectedMove, Mark::Human);
+    Move humanSelectedMove = getHumanMove(board);
+    board.update(humanSelectedMove, Mark::Human);
     
     cout << "You selected move " << humanSelectedMove << endl;
-    cout << b;
+    cout << board;
     
-    return Utilities::checkBoard(b);
+    return Utilities::checkBoard(board);
 }
 
 int main() {
-    Board b;
+    Board board;
     bool done = false;
     BoardState state = BoardState::Ongoing;
     
     while (not done) {
-        state = playAI(b);
+        state = playAI(board);
         done = state != BoardState::Ongoing;
         
         if (not done) {
-            state = playHuman(b);
+            state = playHuman(board);
             done = state != BoardState::Ongoing;
         }
     }
