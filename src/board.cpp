@@ -62,10 +62,15 @@ ostream& operator<<(ostream& o, const Mark& m) {
 }
 
 ostream& operator<<(ostream& o, const Board& b) {
+    o << "  ";
     for (int i = 0; i < Board::n; ++i)
-    {
+        o << i + 1 << " ";
+    o << endl;
+
+    for (int i = 0; i < Board::n; ++i) {
+        o << i + 1 << " ";
         for (int j = 0; j < Board::n; ++j)
-            o << b.at(i,j);
+            o << b.at(i,j) << " ";
         o << endl;
     }
     
