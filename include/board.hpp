@@ -11,8 +11,7 @@ using Moves = vector<Move>;
 enum class Mark { Human, AI, None };
 enum class BoardState { HumanWon, AIWon, Tie, Ongoing };
 
-class Board
-{
+class Board {
 public:
     static const int n = 3;
 

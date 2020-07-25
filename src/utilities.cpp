@@ -3,8 +3,7 @@
 
 namespace Utilities {
     
-    bool isValid(const Board& b, const Move& m)
-    {
+    bool isValid(const Board& b, const Move& m) {
         auto withinBounds = [](int i){ return i >= 0 and i < Board::n; };
         
         if (not withinBounds(m.first) or not withinBounds(m.second))
@@ -13,8 +12,7 @@ namespace Utilities {
         return b.at(m.first,m.second) == Mark::None;
     }
     
-    bool isEmpty(const Board& b)
-    {
+    bool isEmpty(const Board& b) {
         for (int i = 0; i < Board::n; ++i)
             for (int j = 0; j < Board::n; ++j)
                 if (b.at(i,j) != Mark::None)
@@ -23,8 +21,7 @@ namespace Utilities {
         return true;
     }
     
-    bool isFull(const Board& b)
-    {
+    bool isFull(const Board& b) {
         for (int i = 0; i < Board::n; ++i)
             for (int j = 0; j < Board::n; ++j)
                 if (b.at(i,j) == Mark::None)
@@ -33,10 +30,8 @@ namespace Utilities {
         return true;
     }
     
-    BoardState checkRows(const Board& b)
-    {
-        for (int i = 0; i < Board::n; ++i)
-        {
+    BoardState checkRows(const Board& b) {
+        for (int i = 0; i < Board::n; ++i) {
             if (b.at(i,0) == b.at(i,1) and b.at(i,1) == b.at(i,2))
                 if (b.at(i,0) == Mark::Human)
                     return BoardState::HumanWon;
@@ -47,10 +42,8 @@ namespace Utilities {
         return BoardState::Ongoing;
     }
     
-    BoardState checkCols(const Board& b)
-    {
-        for (int i = 0; i < Board::n; ++i)
-        {
+    BoardState checkCols(const Board& b) {
+        for (int i = 0; i < Board::n; ++i) {
             if (b.at(0,i) == b.at(1,i) and b.at(1,i) == b.at(2,i))
                 if (b.at(0,i) == Mark::Human)
                     return BoardState::HumanWon;
@@ -61,8 +54,7 @@ namespace Utilities {
         return BoardState::Ongoing;
     }
     
-    BoardState checkDiagonal(const Board& b)
-    {
+    BoardState checkDiagonal(const Board& b) {
         if (b.at(0,0) == b.at(1,1) and b.at(1,1) == b.at(2,2))
             if (b.at(0,0) == Mark::Human)
                 return BoardState::HumanWon;
@@ -78,8 +70,7 @@ namespace Utilities {
         return BoardState::Ongoing;
     }
     
-    BoardState checkBoard(const Board& b)
-    {
+    BoardState checkBoard(const Board& b) {
         auto rowsState = checkRows(b);
         if (rowsState != BoardState::Ongoing)
             return rowsState;

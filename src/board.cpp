@@ -5,8 +5,7 @@
 
 namespace {
 
-Mark convert(char c)
-{
+Mark convert(char c) {
     if (c == 'X')
         return Mark::Human;
     if (c == 'O')
@@ -21,10 +20,8 @@ Board::Board() : m_board(vector<vector<Mark>>(n,  vector<Mark>(n, Mark::None))) 
 
 Board::Board(const Board& b) : m_board(b.m_board) {}
 
-Board::Board(const vector<vector<char>>& board)
-{
-    for (const auto& row : board)
-    {
+Board::Board(const vector<vector<char>>& board) {
+    for (const auto& row : board) {
         vector<Mark> newRow;
         for (const auto& elem : row)
             newRow.emplace_back(convert(elem));
@@ -34,13 +31,11 @@ Board::Board(const vector<vector<char>>& board)
 
 Board::Board(const Board& b, const Move& m, Mark x) : m_board(b.m_board) { update(m,x); }
 
-void Board::update(const Move& m, Mark x)
-{
+void Board::update(const Move& m, Mark x) {
     m_board[m.first][m.second] = x;
 }
 
-Moves Board::getPossibleMoves() const
-{
+Moves Board::getPossibleMoves() const {
     Moves possibleMoves;
 
     for (int i = 0; i < Board::n; ++i)
@@ -51,13 +46,11 @@ Moves Board::getPossibleMoves() const
     return possibleMoves;
 }
 
-Mark Board::at(int i, int j) const
-{
+Mark Board::at(int i, int j) const {
     return m_board[i][j];
 }
 
-ostream& operator<<(ostream& o, const Mark& m)
-{
+ostream& operator<<(ostream& o, const Mark& m) {
     if (m == Mark::Human)
         o << "X";
     else if (m == Mark::AI)
@@ -68,8 +61,7 @@ ostream& operator<<(ostream& o, const Mark& m)
     return o;
 }
 
-ostream& operator<<(ostream& o, const Board& b)
-{
+ostream& operator<<(ostream& o, const Board& b) {
     for (int i = 0; i < Board::n; ++i)
     {
         for (int j = 0; j < Board::n; ++j)
@@ -80,15 +72,13 @@ ostream& operator<<(ostream& o, const Board& b)
     return o;
 }
 
-ostream& operator<<(ostream& o, const Move& move)
-{
+ostream& operator<<(ostream& o, const Move& move) {
     o << "<" << move.first + 1 << "," << move.second + 1 << ">";
     
     return o;
 }
 
-ostream& operator<<(ostream& o, const Moves& moves)
-{
+ostream& operator<<(ostream& o, const Moves& moves) {
     for (const Move& move : moves)
         o << move << " ";
     

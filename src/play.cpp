@@ -50,19 +50,16 @@ BoardState playHuman(Board& b)
     return Utilities::checkBoard(b);
 }
 
-int main()
-{
+int main() {
     Board b;
     bool done = false;
     BoardState state = BoardState::Ongoing;
     
-    while (not done)
-    {
+    while (not done) {
         state = playAI(b);
         done = state != BoardState::Ongoing;
         
-        if (not done)
-        {
+        if (not done) {
             state = playHuman(b);
             done = state != BoardState::Ongoing;
         }
