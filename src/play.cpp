@@ -21,12 +21,10 @@ Move getHumanMove(const Board& board) {
 }
 
 BoardState playAI(Board& board) {
-    auto validMoves = board.getPossibleMoves();
+    const auto& validMoves = board.getPossibleMoves();
     
     if (not validMoves.empty()) {
-        auto result = computeBestMove(board, validMoves);
-        const Move& selectedMove = result.first;
-        MinMaxValue minMaxValue = result.second;
+        const auto& [selectedMove, minMaxValue] = computeBestMove(board, validMoves);
         board.update(selectedMove, Mark::AI);
         
         cout << "AI selected move " << selectedMove << " with minmax value " << minMaxValue << endl;
