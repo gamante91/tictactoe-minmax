@@ -14,7 +14,7 @@ Player other(Player p) {
     return p == Player::Human ? Player::AI : Player::Human;
 }
 
-int recursiveMinMax(const Board& board, Player player) {
+MinMaxValue recursiveMinMax(const Board& board, Player player) {
     auto state = Utilities::checkBoard(board);
     auto possibleMoves = board.getPossibleMoves();
     
@@ -28,13 +28,13 @@ int recursiveMinMax(const Board& board, Player player) {
     vector<int> outcomes;
     
     for (const auto& move : possibleMoves) {
-        Board newBoard(board, move, player == Player::Human ? Mark::Human : Mark::AI);
-        int outcome = recursiveMinMax(newBoard, other(player));
+        auto newBoard = Board(board, move, player == Player::Human ? Mark::Human : Mark::AI);
+        auto outcome = recursiveMinMax(newBoard, other(player));
         outcomes.emplace_back(outcome);
     }
     
-    int minMaxValue = (player == Player::AI) ? *max_element(outcomes.begin(),outcomes.end())
-                                             : *min_element(outcomes.begin(),outcomes.end());
+    auto minMaxValue = (player == Player::AI) ? *max_element(outcomes.begin(),outcomes.end())
+                                              : *min_element(outcomes.begin(),outcomes.end());
     
     return minMaxValue;
 }
@@ -46,24 +46,35 @@ ostream& operator<<(ostream& o, const vector<Result>& results) {
     return o;
 }
 
+Result selectBestMove(const vector<Result>& outcomes) {
+    auto bestMove = max_element(outcomes.begin(),
+                                outcomes.end(),
+                                [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });
+    auto bestMinMaxValue = bestMove->second;
+    auto it = outcomes.begin();
+    bool found = false;
+
+    while (not found) {
+        it = outcomes.begin();
+        std::advance(it, std::rand() % outcomes.size());
+        found = it->second == bestMinMaxValue;
+    }
+
+    return *it;
+}
+
 Result computeBestMove(const Board& board, const Moves& possibleMoves) {
-    if (Utilities::isEmpty(board))
-        return make_pair(make_pair(1,1), +10);
-    
     vector<Result> outcomes;
     
     for (const auto& move : possibleMoves) {
         Board newBoard(board, move, Mark::AI);
         
-        int minmaxValue = recursiveMinMax(newBoard, Player::Human);        
+        auto minmaxValue = recursiveMinMax(newBoard, Player::Human);        
         outcomes.emplace_back(make_pair(move, minmaxValue));
     }
 
     cout << "AI possible moves:" << endl
          << outcomes << endl;
     
-    auto bestMove = *max_element(outcomes.cbegin(), outcomes.cend(),
-                                 [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });
-                                      
-    return bestMove;
+    return selectBestMove(outcomes);
 }

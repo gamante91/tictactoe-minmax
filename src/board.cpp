@@ -78,7 +78,7 @@ ostream& operator<<(ostream& o, const Board& b) {
 }
 
 ostream& operator<<(ostream& o, const Move& move) {
-    o << "<" << move.first + 1 << "," << move.second + 1 << ">";
+    o << "(" << move.first + 1 << "," << move.second + 1 << ")";
     
     return o;
 }
