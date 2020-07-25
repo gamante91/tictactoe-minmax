@@ -1,5 +1,4 @@
-#ifndef Board_hpp
-#define Board_hpp
+#pragma once
 
 #include <vector>
 #include <string>
@@ -30,6 +29,3 @@ ostream& operator<<(ostream& o, const Move& m);
 ostream& operator<<(ostream& o, const Moves& m);
 ostream& operator<<(ostream& o, const Mark& m);
 ostream& operator<<(ostream& o, const Board& b);
-
-
-#endif /* Board_hpp */

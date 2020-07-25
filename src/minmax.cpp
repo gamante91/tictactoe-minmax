@@ -2,9 +2,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "include/board.hpp"
-#include "include/minmax.hpp"
-#include "include/utilities.hpp"
+#include <board.hpp>
+#include <minmax.hpp>
+#include <utilities.hpp>
 
 using namespace std;
 

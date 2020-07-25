@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "include/board.hpp"
+#include <board.hpp>
 
 namespace {
 

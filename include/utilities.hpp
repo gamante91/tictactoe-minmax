@@ -1,7 +1,6 @@
-#ifndef Utilities_h
-#define Utilities_h
+#pragma once
 
-#include "board.hpp"
+#include <board.hpp>
 
 namespace Utilities {
    
@@ -13,5 +12,3 @@ bool isFull(const Board& b);
 
 
 } // namespace Utilities
-
-#endif /* Utilities_h */

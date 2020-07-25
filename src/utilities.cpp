@@ -1,5 +1,5 @@
-#include "include/utilities.hpp"
-#include "include/board.hpp"
+#include <utilities.hpp>
+#include <board.hpp>
 
 namespace Utilities {
     
