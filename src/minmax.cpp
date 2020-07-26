@@ -14,7 +14,7 @@ Player other(Player p) {
     return p == Player::Human ? Player::AI : Player::Human;
 }
 
-MinMaxValue recursiveMinMax(const Board& board, Player player) {
+static MinMaxValue recursiveMinMax(const Board& board, Player player) {
     auto state = Utilities::checkBoard(board);
     auto possibleMoves = board.getPossibleMoves();
     
@@ -46,7 +46,7 @@ ostream& operator<<(ostream& o, const vector<Result>& results) {
     return o;
 }
 
-Result selectBestMove(const vector<Result>& outcomes) {
+static Result selectBestMove(const vector<Result>& outcomes) {
     auto bestMove = max_element(outcomes.begin(),
                                 outcomes.end(),
                                 [](const Result& outcome1, const Result& outcome2){ return outcome1.second < outcome2.second; });

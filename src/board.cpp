@@ -3,9 +3,7 @@
 
 #include <board.hpp>
 
-namespace {
-
-Mark convert(char c) {
+static Mark convert(char c) {
     if (c == 'X')
         return Mark::Human;
     if (c == 'O')
@@ -13,8 +11,6 @@ Mark convert(char c) {
 
     return Mark::None;
 }
-    
-} // namespace
 
 Board::Board() : m_board(vector<vector<Mark>>(n,  vector<Mark>(n, Mark::None))) {}
 
