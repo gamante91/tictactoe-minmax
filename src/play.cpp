@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 #include <board.hpp>
 #include <minmax.hpp>
@@ -20,41 +21,50 @@ Move getHumanMove(const Board& board) {
     return move;
 }
 
-BoardState playAI(Board& board) {
-    const auto& validMoves = board.getPossibleMoves();
+BoardState play(Board& board, Player player) {
+    if (player == Player::AI) {
+        const auto& validMoves = board.getPossibleMoves();
     
-    if (not validMoves.empty()) {
-        const auto& [selectedMove, minMaxValue] = computeBestMove(board, validMoves);
-        board.update(selectedMove, Mark::AI);
+        if (not validMoves.empty()) {
+            const auto& [selectedMove, minMaxValue] = computeBestMove(board, validMoves);
+            board.update(selectedMove, Mark::AI);
         
-        cout << "AI selected move " << selectedMove << " with minmax value " << minMaxValue << endl;
+            cout << "AI selected move " << selectedMove << " with minmax value " << minMaxValue << endl;
+            cout << board;
+        }
+    } else {
+        Move humanSelectedMove = getHumanMove(board);
+        board.update(humanSelectedMove, Mark::Human);
+    
+        cout << "You selected move " << humanSelectedMove << endl;
         cout << board;
     }
-    
+
     return Utilities::checkBoard(board);
 }
 
-BoardState playHuman(Board& board) {
-    Move humanSelectedMove = getHumanMove(board);
-    board.update(humanSelectedMove, Mark::Human);
-    
-    cout << "You selected move " << humanSelectedMove << endl;
-    cout << board;
-    
-    return Utilities::checkBoard(board);
+Player selectRandomPlayer() {
+    static auto seed = time(nullptr);
+    srand(seed);
+
+    return Player(std::rand() % 2);
 }
 
 int main() {
     Board board;
     bool done = false;
     BoardState state = BoardState::Ongoing;
+    Player player1 = selectRandomPlayer();
+    Player player2 = other(player1);
+
+    cout << (player1 == Player::AI ? "AI" : "You") << " will start the game!" << endl;
     
     while (not done) {
-        state = playAI(board);
+        state = play(board, player1);
         done = state != BoardState::Ongoing;
         
         if (not done) {
-            state = playHuman(board);
+            state = play(board, player2);
             done = state != BoardState::Ongoing;
         }
     }

@@ -10,8 +10,6 @@
 
 using namespace std;
 
-enum class Player { Human, AI };
-
 Player other(Player p) {
     return p == Player::Human ? Player::AI : Player::Human;
 }
@@ -56,12 +54,12 @@ Result selectBestMove(const vector<Result>& outcomes) {
     copy_if(outcomes.begin(),
             outcomes.end(),
             back_inserter(bestMoves),
-            [&bestMove](const auto& result){ return result.second == bestMove->second; });
+            [&bestMove](const auto& result){ return result.second == bestMove->second; });    
     static auto seed = time(nullptr);
     srand(seed);
-    auto it = outcomes.begin();
+    auto it = bestMoves.begin();
     std::advance(it, std::rand() % bestMoves.size());
-
+    
     return *it;
 }
 
