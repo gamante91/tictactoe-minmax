@@ -57,7 +57,8 @@ Result selectBestMove(const vector<Result>& outcomes) {
             outcomes.end(),
             back_inserter(bestMoves),
             [&bestMove](const auto& result){ return result.second == bestMove->second; });
-    srand(time(nullptr));
+    static auto seed = time(nullptr);
+    srand(seed);
     auto it = outcomes.begin();
     std::advance(it, std::rand() % bestMoves.size());
 
